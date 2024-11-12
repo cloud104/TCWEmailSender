@@ -1,0 +1,40 @@
+{
+  "id": "Locks - SQL Server-database=ZB4Z6T_PRD,datacenter=tradicional,host=NSN16UCSD9719.dbcloud.local,sql_instance=NSN16UCSD9719:PROTHEUS",
+  "message": "Os campos são verdes.",
+  "details": "Locks - SQL Server",
+  "time": "2022-08-17T13:53:05Z",
+  "duration": 0,
+  "level": "OK",
+  "data": {
+    "series": [
+      {
+        "name": "sqlserver_locks",
+        "tags": {
+          "alertName": "Locks - SQL Server",
+          "database": "ZB4Z6T_PRD",
+          "datacenter": "tradicional",
+          "host": "NSN16UCSD9719.dbcloud.local",
+          "sql_instance": "NSN16UCSD9719:PROTHEUS"
+        },
+        "columns": [
+          "time",
+          "channel",
+          "lock_tree",
+          "max_time_minutes",
+          "qtd_blks"
+        ],
+        "values": [
+          [
+            "2022-08-17T13:53:05Z",
+            "#tcw-madeiramadeira",
+            "<name>ZB4Z6T_PRD</name><BLOCKING_TREE>    HEAD -  369 SELECT  TOP 40 R_E_C_N_O_, D_E_L_E_T_, F2D_FILIAL, F2D_IDREL FROM dbo.F2D010 WHERE  F2D_FILIAL = '010104' AND F2D_IDREL  = '849e283d-49de-e8f6-dc98-764d4e41c432' AND D_E_L_E_T_ = ' ' ORDER BY F2D_FILIAL,F2D_IDREL,R_E_C_N_O_</BLOCKING_TREE><name>ZB4Z6T_PRD</name><BLOCKING_TREE>    |         |------  52 (@0 varchar(8000),@1 int,@2 int)update dbo . SD1010 set D_E_L_E_T_ = @0 , R_E_C_D_E_L_ = @1 where R_E_C_N_O_ = @2</BLOCKING_TREE><name>ZB4Z6T_PRD</name><BLOCKING_TREE>    |         |         |------  298 (@0 varchar(8000),@1 int,@2 int)update dbo . SD1010 set D_E_L_E_T_ = @0 , R_E_C_D_E_L_ = @1 where R_E_C_N_O_ = @2</BLOCKING_TREE><name>ZB4Z6T_PRD</name><BLOCKING_TREE>    |         |         |------  600 (@0 varchar(8000),@1 int,@2 int)update dbo . SD1010 set D_E_L_E_T_ = @0 , R_E_C_D_E_L_ = @1 where R_E_C_N_O_ = @2</BLOCKING_TREE><name>ZB4Z6T_PRD</name><BLOCKING_TREE>    |         |         |------  923 (@0 varchar(8000),@1 int,@2 int)update dbo . SD1010 set D_E_L_E_T_ = @0 , R_E_C_D_E_L_ = @1 where R_E_C_N_O_ = @2</BLOCKING_TREE>",
+            0,
+            2
+          ]
+        ]
+      }
+    ]
+  },
+  "previousLevel": "OK",
+  "recoverable": true
+}
