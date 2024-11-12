@@ -173,7 +173,41 @@ Function New-AlertMessage {
 
 }
 
+Function New-AlertResponse {
+    param($Alert)
 
+    $id = Get-Hash $Alert.id
+    try {
+        $alertHistory = Get-Content "$BaseDir/history/In progress/$id.json" | ConvertFrom-Json
+    }
+    catch {
+        Write-Error "$(Get-Date) $id - Falha ao encontrar histórico do alerta."
+        return $false
+    }
+
+    $alertProps = $alertHistory.AlertProps
+    $emailMessage = $alertHistory.Message
+
+    $emailMessage.time = $Alert.time
+    $emailMessage.message = $Alert.message
+
+    Add-LogRecord -string "$id - Enviando e-mail de resolução do alerta"
+    $emailBody = "Alerta Resolvido: $($emailMessage.alertName)`nHost: $($emailMessage.host)`nMensagem: $($emailMessage.message)"
+    $emailSubject = "Alerta Resolvido: $($emailMessage.alertName) em $($emailMessage.host)"
+
+    # Enviando o e-mail de resolução
+    $emailSent = Send-EmailAlert -Subject $emailSubject -Body $emailBody
+
+    if ($emailSent) {
+        $alertHistory | Add-Member -NotePropertyName Finished -NotePropertyValue (Get-Date) -Force
+        $alertHistory | ConvertTo-Json -Depth 15 | Out-File "$BaseDir/history/finished/$id.json" -Force
+
+        Remove-Item "$BaseDir/history/In progress/$id.json" -Force
+    } else {
+        Add-LogRecord -string "$id - Falha ao enviar e-mail de resolução" -file "error"
+        return $false
+    }
+}
 #endregion
 
 #region Run
